@@ -1,9 +1,15 @@
+// this is for process(eg:- process -- variable used in setting port)
+//  and create an environment variable file called ".env"
+require('dotenv').config()
+
 const mongoose = require('mongoose');
 const express = require("express")
 
 const app = express()
 
-mongoose.connect('mongodb://localhost:27017/tshirt', {
+// process --> where it attacj=hes all the dependencies
+// .env --> file name of enviroment variable
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -11,8 +17,8 @@ mongoose.connect('mongodb://localhost:27017/tshirt', {
   console.log("DB CONNECTED");
 })
 
-
-const port = 8000
+// evn.port is for production level port or environment port
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
   console.log(`app is running at ${port}`);
