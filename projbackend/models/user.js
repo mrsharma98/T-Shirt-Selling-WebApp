@@ -46,7 +46,7 @@ userSchema.virtual("password")
   .set(function (password) {
     this._password = password  // just storing in a variable (not a variable declared anywhere)
     this.salt = uuidv4() // salt field is what we declared above
-    this.encry_password = this.securePassword(passowrd)  // encry_password is also something we declared above
+    this.encry_password = this.securePassword(password)  // encry_password is also something we declared above
   })
   .get(function () {
     return this._password
@@ -54,7 +54,7 @@ userSchema.virtual("password")
 
 
 // Schema methods 
-userSchema.method = {
+userSchema.methods = {
   authenticate: function (plainpassword) {
     return this.securePassword(plainpassword) === this.encry_password
   },
@@ -72,6 +72,6 @@ userSchema.method = {
 }
 
 
-module.export = mongoose.model("User", userSchema)
+module.exports = mongoose.model("User", userSchema)
 // exporting model -- module.export
 // model(nameOfTheSchema, actualSchema)
