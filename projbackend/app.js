@@ -13,6 +13,7 @@ const cors = require("cors")
 app.use(bodyParser.json())
 // app.use(middleware_name) --> basic syntax for middleware
 app.use(cookieParser())
+// cookiesParse -- helps to put or deleted some values to into the user's browser.
 app.use(cors())
 
 const authRoutes = require('./routes/auth')

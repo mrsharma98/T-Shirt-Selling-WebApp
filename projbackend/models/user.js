@@ -42,11 +42,17 @@ const userSchema = new mongoose.Schema({
 
 
 // Virtual fields
+// get implemented on the go
 userSchema.virtual("password")
   .set(function (password) {
     this._password = password  // just storing in a variable (not a variable declared anywhere)
+    // this is just to store the original password, may be required afterwards
+
+    // setting the salt field
     this.salt = uuidv4() // salt field is what we declared above
-    this.encry_password = this.securePassword(password)  // encry_password is also something we declared above
+
+    // setting the encry_password field
+    this.encry_password = this.securePassword(password)
   })
   .get(function () {
     return this._password
