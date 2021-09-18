@@ -74,7 +74,6 @@ exports.signin = (req, res) => {
     return res.json({ token, user: { _id, name, email, role } })
 
   })
-
 }
 
 exports.signout = (req, res) => {
@@ -83,4 +82,40 @@ exports.signout = (req, res) => {
   res.json({
     message: "User signout successfully"
   })
+}
+
+
+// protected routes
+exports.isSignedIn = expressJwt({
+  secret: process.env.SECRET,
+  userProperty: "auth"
+  // once we are giving a middleware, means using isSignedIn in any route
+  // it just adds a new property in the user request(req) named userProperty
+  // auth actually holds an _id, which is same as _id given to us while signin
+})
+
+// custom middilewares
+exports.isAuthenticated = (req, res, next) => {
+  let checker = req.profile && req.auth && req.profile._id == req.auth._id
+  // profile will be set from frontend
+  // auth is what we added while signin
+  // checking if _id set by profile(by frontend) and _id by set by middleware (isSignedIn -- auth) is same
+
+  if (!checker) {
+    return res.status(403).json({
+      error: "ACCESS DENIED"
+    })
+  }
+
+  next()
+}
+
+exports.isAdmin = (req, res, next) => {
+  if(req.profile.role === 0) {
+    return res.status(403).json({
+      error: "You are not ADMIN, Access denied"
+    })
+  }
+
+  next()
 }

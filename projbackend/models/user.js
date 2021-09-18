@@ -34,6 +34,8 @@ const userSchema = new mongoose.Schema({
     type: Number, // higher the no, more the previlegs
     default: 0
   },
+  // role = 0 -- regular user
+  // role = 1 -- admin
   purchases: {
     typr: Array,
     default: []

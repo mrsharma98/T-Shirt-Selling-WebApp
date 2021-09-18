@@ -12,7 +12,7 @@ const ProductCartSchema = new mongoose.Schema({
   price: Number
 })
 
-const ProductCart = mongoose.module("ProductCart", ProductCartSchema)
+const ProductCart = mongoose.model("ProductCart", ProductCartSchema)
 
 
 const OrderSchema = new mongoose.Schema({
@@ -22,7 +22,7 @@ const OrderSchema = new mongoose.Schema({
   products: [ProductCartSchema],
   transaction_id: {},
   amount: {
-    type: number
+    type: Number
   },
   address: String,
   updated: Date,
@@ -33,6 +33,6 @@ const OrderSchema = new mongoose.Schema({
 }, { timestamps: true })
 
 
-const Order = mongoose.module("Order", OrderSchema)
+const Order = mongoose.model("Order", OrderSchema)
 
 module.export = { Order, ProductCart }

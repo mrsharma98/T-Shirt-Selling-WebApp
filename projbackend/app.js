@@ -16,10 +16,9 @@ app.use(cookieParser())
 // cookiesParse -- helps to put or deleted some values to into the user's browser.
 app.use(cors())
 
+// My routes
 const authRoutes = require('./routes/auth')
-
-
-
+const userRouters = require('./routes/user')
 
 
 // DB CCONNECTION
@@ -39,6 +38,8 @@ mongoose.connect(process.env.DATABASE, {
 // here I can use route, domain/api/routers (routers-- can be any route)
 // "/api" is a prefix
 app.use("/api", authRoutes);
+app.use("/api", userRouters);
+
 
 
 // PORT
