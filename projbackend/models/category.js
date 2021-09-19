@@ -11,4 +11,4 @@ const categorySchema = new mongoose.Schema({
 }, { timestamps: true })
 // here this will record the creation time of the category and store it to db.
 
-module.export = mongoose.model("Category", categorySchema)
+module.exports = mongoose.model("Category", categorySchema)

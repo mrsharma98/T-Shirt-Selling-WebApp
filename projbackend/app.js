@@ -19,6 +19,7 @@ app.use(cors())
 // My routes
 const authRoutes = require('./routes/auth')
 const userRouters = require('./routes/user')
+const categoryRouters = require('./routes/category')
 
 
 // DB CCONNECTION
@@ -39,6 +40,7 @@ mongoose.connect(process.env.DATABASE, {
 // "/api" is a prefix
 app.use("/api", authRoutes);
 app.use("/api", userRouters);
+app.use("/api", categoryRouters);
 
 
 
