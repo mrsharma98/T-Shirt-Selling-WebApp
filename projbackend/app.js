@@ -21,6 +21,7 @@ const authRoutes = require('./routes/auth')
 const userRouters = require('./routes/user')
 const categoryRouters = require('./routes/category')
 const productRouters = require("./routes/product")
+const orderRouters = require("./routes/order")
 
 
 // DB CCONNECTION
@@ -43,6 +44,7 @@ app.use("/api", authRoutes);
 app.use("/api", userRouters);
 app.use("/api", categoryRouters);
 app.use("/api", productRouters);
+app.use("/api", orderRouters);
 
 
 
