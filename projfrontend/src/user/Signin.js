@@ -8,8 +8,8 @@ import { signin, authenticate, isAuthenticated } from '../auth/helper'
 const Signin = () => {
 
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: "a@manish.com",
+    password: "12345",
     error: "",
     loading: false,
     didRedirect: false
@@ -43,7 +43,18 @@ const Signin = () => {
       .catch(console.log("signin request failed"))
   }
 
-
+  const performRedirect = () => {
+    if(didRedirect) {
+      if (user && user.role === 1) {
+        return <Redirect to="admin/dashboard" />
+      } else {
+        return <Redirect to="user/dashboard" />
+      }
+    }
+    if (isAuthenticated()) {
+      return <Redirect to="/" />
+    }
+  }
 
   const loadingMessage = () => {
     return (
@@ -67,19 +78,6 @@ const Signin = () => {
         </div>
       </div>
     )
-  }
-
-  const performRedirect = () => {
-    if(didRedirect) {
-      if (user && user.role === 1) {
-        return <p>Redirect to admin</p>
-      } else {
-        return <p>Redirect to user dashboard</p>
-      }
-    }
-    if (isAuthenticated()) {
-      return <Redirect to="/" />
-    }
   }
 
   const signInForm = () => {
