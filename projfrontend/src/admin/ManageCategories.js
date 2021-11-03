@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper/index'
 
 import Base from '../core/Base'
-import { deleteProduct, getProducts } from './helper/adminapicall'
+import { deleteCategory, getCategories } from './helper/adminapicall'
 
-const ManageProducts = () => {
+const ManageCategories = () => {
 
-  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
 
   const { user, token } = isAuthenticated()
 
   const preload = () => {
-    getProducts().then(data => {
+    getCategories().then(data => {
       if (data.error) {
         console.log(data.error);
       } else {
-        setProducts(data)
+        setCategories(data)
       }
     })
   }
@@ -25,8 +25,8 @@ const ManageProducts = () => {
     preload()
   }, [])
 
-  const deleteThisProduct = (productId) => {
-    deleteProduct(productId, user._id, token)
+  const deleteThisCategory = (categoryId) => {
+    deleteCategory(categoryId, user._id, token)
       .then(data => {
         if (data.error) {
           console.log(data.error);
@@ -38,7 +38,7 @@ const ManageProducts = () => {
 
   return (
     <Base title="Welcome admin" description="Manage products here">
-      <h2 className="mb-4">All products:</h2>
+      <h2 className="mb-4">All categories:</h2>
       <Link className="btn btn-info" to={`/admin/dashboard`}>
         <span className="">Admin Home</span>
       </Link>
@@ -46,22 +46,22 @@ const ManageProducts = () => {
         <div className="col-12">
           <h2 className="text-center text-white my-3">Total 3 products</h2>
 
-          {products.map((product, index) => {
+          {categories.map((category, index) => {
             return (
               <div className="row text-center mb-2" key={index}>
                 <div className="col-4">
-                  <h3 className="text-white text-left">{product.name}</h3>
+                  <h3 className="text-white text-left">{category.name}</h3>
                 </div>
                 <div className="col-4">
                   <Link
                     className="btn btn-success"
-                    to={`/admin/product/update/${product._id}`}
+                    to={`/admin/category/update/${category._id}`}
                   >
                     <span className="">Update</span>
                   </Link>
                 </div>
                 <div className="col-4">
-                  <button onClick={() => {deleteThisProduct(product._id)}} className="btn btn-danger">
+                  <button onClick={() => {deleteThisCategory(category._id)}} className="btn btn-danger">
                     Delete
                   </button>
                 </div>
@@ -74,4 +74,4 @@ const ManageProducts = () => {
   )
 }
 
-export default ManageProducts
+export default ManageCategories

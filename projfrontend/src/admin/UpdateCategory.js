@@ -3,10 +3,10 @@ import Base from '../core/Base'
 
 import { Link } from 'react-router-dom'
 import { isAuthenticated } from '../auth/helper'
-import { createCategory } from './helper/adminapicall'
+import { updateCategory, getCategory } from './helper/adminapicall'
 
 
-const AddCategory = () => {
+const UpdateCategory = () => {
 
   const [name, setName] = useState("")
   const [error, setError] = useState(false)
@@ -33,7 +33,7 @@ const AddCategory = () => {
     setSuccess(false)
 
     // backend request 
-    createCategory(user._id, token, {name})
+    updateCategory(user._id, token, {name})
       .then((data) => {
         if (data.error) {
           setError(true)
@@ -94,4 +94,4 @@ const AddCategory = () => {
   )
 }
 
-export default AddCategory
+export default UpdateCategory

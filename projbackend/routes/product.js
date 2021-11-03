@@ -19,13 +19,13 @@ router.get("/product/:productId", getProduct)
 router.get("/product/photo/:productId", photo)
 
 // update
-router.put("product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, updateProduct)
+router.put("/product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, updateProduct)
 
 // delete
-router.delete("product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, deleteProduct)
+router.delete("/product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, deleteProduct)
 
 // listing route
-router.get("products", getAllProducts)
+router.get("/products", getAllProducts)
 
 // for all the distinct categories
 router.get("/products/categories", getAllUniqueCategories)
